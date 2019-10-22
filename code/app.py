@@ -7,8 +7,8 @@ api = Api(app)
 items = []
 class Item(Resource):
     def get(self, name):
-        item = filter(lambda x: x['name'] == name, items)
-        return {'item': None}, 404
+        item = next(filter(lambda x: x['name'] == name, items), None)
+        return {'item': None}, 200 if item else 404
 
     def post(self, name):
         data = request.get_json()

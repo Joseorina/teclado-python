@@ -7,9 +7,7 @@ api = Api(app)
 items = []
 class Item(Resource):
     def get(self, name):
-        for item in items:
-            if item['name'] == name:
-                return item
+        item = filter(lambda x: x['name'] == name, items)
         return {'item': None}, 404
 
     def post(self, name):

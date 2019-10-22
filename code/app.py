@@ -9,7 +9,7 @@ api = Api(app)
 
 jwt = JWT(app, authenticate, identity)
 
-app.secret_key = 'joseorina'
+app.secret_key = 'jose'
 
 items = []
 class Item(Resource):
@@ -25,6 +25,9 @@ class Item(Resource):
         item = {'name': name, 'price': data['price']}
         items.append(item)
         return item, 201
+    
+    def delete(self, name):
+        pass 
     
 class Items(Resource):
     def get(self):

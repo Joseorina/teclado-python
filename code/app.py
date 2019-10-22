@@ -10,12 +10,17 @@ class Item(Resource):
         for item in items:
             if item['name'] == name:
                 return item
+        return {'item': None}, 404
 
     def post(self, name):
         item = {'name': name, 'price': 12.00}
         items.append(item)
-        return item
+        return item, 201
     
-api.add_resource(Item, '/item/<sting:name>')
-
-app.run(port=5000)
+class Items(Resource):
+    def get(self):
+        return {'items': items}, 200
+    
+api.add_resource(Item, '/item/<string:name>')
+api.add_resource(Items,'/items')
+app.run(port=5000, debug=True)
